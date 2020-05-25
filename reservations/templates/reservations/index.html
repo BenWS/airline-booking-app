@@ -1,0 +1,39 @@
+<html>
+  <body>
+    <h1>Airline Booking Website</h1>
+    <div>
+      <h2>User Actions Banner</h2>
+      <div>
+        <h3>Flight Reservation Management</h3>
+        <ul>
+          <li><a href="{% url 'reservations:book' %}">Book</a></li>
+          <li><a href="check-in.html">Check-in</a></li>
+          <li><a href="my-trips.html">My Trips</a></li>
+          <li><a href="flight-status.html">Flight Status</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>User Account Management</h3>
+        <ul>
+          <li><a href="{% url 'reservations:create-account' %}">Create Account</a></li>
+          <li><a href="{% url 'reservations:sign-in' %}">Sign-In</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h2>Information Section 1</h2>
+      <p>help text help text help text help text help text help text help text help text help text</p>
+      <div>Option 1</div>
+      <div>Option 2</div>
+      <div>Option 3</div>
+    </div>
+    <div>
+      <h2>Information Section 2</h2>
+      <p>help text help text help text help text help text help text help text help text help text</p>
+    </div>
+    <div>
+      <h2>Information Section 3</h2>
+      <p>help text help text help text help text help text help text help text help text help text</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+searchFlights accepts parameters and returns a page of results that match the search criteria
+
+VIEW queries the MODEL and returns results to a TEMPLATE
+
+The TEMPLATE then builds an HTML Table
+
+-	Flight Number
+-	Flight Departure Time
+-	Flight Arrival Time
+-	Plane Make and Model
+-	Economy Fare (if seats available)
+-	Comfort Fare (if seats available)
+-	First Class Fare (if seats available)
+
+http://localhost:8000/search-flights?departure_airport=3&arrival_airport=4&departure_date=2020-05-23&return_date=2020-05-24&number_of_passengers=2&round_trip=on

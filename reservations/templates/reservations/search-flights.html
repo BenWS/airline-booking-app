@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Choose Departure Flight</h1>
+    <p>User chooses one of the available flights</p>
+    <p>Following information displayed to the user:
+      <ul>
+        <li>Flight Date</li>
+        <li>Flight Number</li>
+        <li>Departure Time</li>
+        <li>Arrival Time</li>
+        <li>Plane Make/Model</li>
+        <li>Economy Fare</li>
+        <li>Comfort Fare</li>
+        <li>First Class Fare</li>
+      </ul>
+    </p>
+    <table>
+      <tr>
+        <th>Flight Date</th>
+        <th>Flight Number</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Plane Make/Model</th>
+        <th>Economy Fare</th>
+        <th>Comfort Fare</th>
+        <th>First Class Fare</th>
+      </tr>
+      {% for flight in flights %}
+      <tr>
+        <td>{{flight.departure_datetime}}</td>
+        <td>{{flight.id}}</td>
+        <td>{{flight.departure_datetime}}</td>
+        <td>{{flight.arrival_datetime}}</td>
+        <td>Plane Make/Model</td>
+        <td>Economy Fare</td>
+        <td>Comfort Fare</td>
+        <td>First Class Fare</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <p>User also chooses the Service Class associated with the flight</p>
+    <p>If the user selected Round Trip, they would continue on to select options for the <a href="choose-return-flight.html">Return Flight</a></p>
+    <p>Otherwise, user continues on to the <a href="flight-confirmation.html">Confirmation Page</a></p>
+  </body>
+</html>

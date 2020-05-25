@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <h1>Book Reservation</h1>
+    <p>User completes this form:</p>
+    <form action="{% url 'reservations:search-flights' %}">
+      <label for="departure_airport">Departing From</label><br/>
+      <input type="text" id="departure_airport" name="departure_airport"><br/>
+      <label for="arrival_airport">Arriving To</label><br/>
+      <input type="text" id="arrival_airport" name="arrival_airport"><br/>
+      <label for="departure_date">Departure Date</label><br/>
+      <input type="text" id ="departure_date" name="departure_date"><br/>
+      <label for="return_date">Return Date</label><br/>
+      <input type="text" id="return_date" name="return_date"><br/>
+      <label for="number_of_passengers">Number of Passengers</label><br/>
+      <input type="text" id="number_of_passengers" name = "number_of_passengers"/><br/>
+      <label for="round_trip">Round_Trip?</label>
+      <input type="checkbox" id="round_trip" name="round_trip"><br/>
+      <input type="submit" value="Submit">
+    </form>
+    <p>After completing the form:</p>
+    <ol>
+      <li>If user isn't already signed-in they are directed to the <a href="sign-in-redirect.html">Sign-in</a> page </li>
+      <li>If user is already signed-in they are directed to the <a href="choose-departure-flight.html">Choose Flights</a> page</li>
+    </ol>
+  </body>
+</html>

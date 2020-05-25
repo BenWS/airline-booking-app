@@ -1,0 +1,23 @@
+<html>
+  <body>
+    <h1>Create New Account</h1>
+    <p>User creates new user account here</p>
+    <form action="{% url 'reservations:create-account'%}" method="post">
+      {% csrf_token %}
+      <label for"first_name">First Name</label><br/>
+      <input type="text" id="first_name" name="first_name"><br/>
+      <label for"last_name"><br/>Last Name</label><br/>
+      <input type="text" id="last_name" name="last_name"><br/>
+      <label for"email_address"><br/>Email Address</label><br/>
+      <input type="text" id="email_address" name="email_address"><br/>
+      <label for"username"><br/>User Name</label><br/>
+      <input type="text" id="username" name="username"><br/>
+      <label for"password"><br/>Password</label><br/>
+      <input type="password" id="password" name="password"><br/>
+      <label for"confirm_password"><br/>Confirm Password</label><br/>
+      <input type="password" id="confirm_password" name="confirm_password"><br/>
+      <input type="submit" value="Submit">
+    </form>
+    <p>User is directed back to the <a href="{% url 'reservations:index' %}">Home Page</a> after submitting.</p>
+  </body>
+</html>
