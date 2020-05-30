@@ -1,15 +1,20 @@
-searchFlights accepts parameters and returns a page of results that match the search criteria
+When a user selects a flight on the Departure Flight Page
 
-VIEW queries the MODEL and returns results to a TEMPLATE
+- Create a temporary reservation, marked with finalized = FALSE
+- Select a seat? Or just base the availability off TOTAL SEATS and TOTAL RESERVATIONS?
+- What about SEAT CLASS? How to cache requested SEAT CLASS on temporary reservation?
 
-The TEMPLATE then builds an HTML Table
+User selects flight and class 
+Application creates non-finalized reservation
+Application continues to allow the user to select Return Flight if round_trip = 1
+Else the Application continues onto the next stage of the process
 
--	Flight Number
--	Flight Departure Time
--	Flight Arrival Time
--	Plane Make and Model
--	Economy Fare (if seats available)
--	Comfort Fare (if seats available)
--	First Class Fare (if seats available)
+---------------------------------------
 
-http://localhost:8000/search-flights?departure_airport=3&arrival_airport=4&departure_date=2020-05-23&return_date=2020-05-24&number_of_passengers=2&round_trip=on
+Steps for request processing:
+ - User makes HTTP request to URL in browser
+ - The urlsconf.py module interprets the URL and directs the request to the designated views.py function
+ - The view recevies the HTTP request
+ - An HTML template object is created with the template.loader() function
+ - The context dictionary is created with the specified key values
+ - The view makes an HttpResponse using HTML rendered by template.render() function

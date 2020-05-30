@@ -9,19 +9,7 @@
   <body>
     <h1>Choose Departure Flight</h1>
     <p>User chooses one of the available flights</p>
-    <p>Following information displayed to the user:
-      <ul>
-        <li>Flight Date</li>
-        <li>Flight Number</li>
-        <li>Departure Time</li>
-        <li>Arrival Time</li>
-        <li>Plane Make/Model</li>
-        <li>Economy Fare</li>
-        <li>Comfort Fare</li>
-        <li>First Class Fare</li>
-      </ul>
-    </p>
-    <table>
+    <table style="text-align:center">
       <tr>
         <th>Flight Date</th>
         <th>Flight Number</th>
@@ -39,9 +27,9 @@
         <td>{{flight.departure_datetime}}</td>
         <td>{{flight.arrival_datetime}}</td>
         <td>Plane Make/Model</td>
-        <td>Economy Fare</td>
-        <td>Comfort Fare</td>
-        <td>First Class Fare</td>
+        <td style="padding:5px">Economy Fare<br/><a href='{% url 'reservations:confirmation' %}'>(Select)</a></td>
+        <td style="padding:5px">Comfort Fare<br/><a href='{% url 'reservations:confirmation' %}'>(Select)</a></td>
+        <td style="padding:5px">First Class Fare<br/><a href='{% url 'reservations:confirmation' %}'>(Select)</a></td>
       </tr>
       {% endfor %}
     </table>

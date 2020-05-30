@@ -45,6 +45,13 @@ def bookReservation(request):
     if request.method=="GET":
         return render(request,"reservations/book.html")
 
+def chooseFlight(request):
+    print(reverse('reservations:confirmation'))
+    template = loader.get_template('reservations/confirmation.html')
+    context = {}
+    return HttpResponse(template.render(context,request))
+
+
 def searchFlights(request):
     '''
     Return results page back from search query
@@ -56,8 +63,8 @@ def searchFlights(request):
             departure_datetime__date = request.GET['departure_date']
         )
         # print('FLIGHT OBJECT: ' + str(flights[0].__dict__))
-        print('Departure Airport: ' + str(flights[0].departure_airport.__dict__))
-        print('Flight: ' + str(flights[0].__dict__))
+        # print('Departure Airport: ' + str(flights[0].departure_airport.__dict__))
+        # print('Flight: ' + str(flights[0].departure_airport.__dict__))
         template = loader.get_template('reservations/search-flights.html')
         context = {
             'flights':flights
