@@ -17,7 +17,8 @@ class Flight(models.Model):
 
 class Reservation(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    # flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
+    departure_flight = models.ForeignKey(Flight, on_delete=models.PROTECT, blank=False)
+    return_flight = models.ForeignKey(Flight, on_delete=models.PROTECT, blank=False)
     number_of_passengers = models.PositiveIntegerField(blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -26,6 +27,9 @@ class Reservation(models.Model):
 
 class Passenger(models.Model):
     reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+    title = models.CharField(max_length = 10, blank = False)
+    first_name = models.CharField(max_length = 100, blank = False)
+    last_name = models.CharField(max_length = 100, blank = False)
 
 class ReservationSeat(models.Model):
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)

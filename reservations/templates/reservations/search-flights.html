@@ -9,30 +9,52 @@
   <body>
     <h1>Choose Departure Flight</h1>
     <p>User chooses one of the available flights</p>
-    <table style="text-align:center">
-      <tr>
-        <th>Flight Date</th>
-        <th>Flight Number</th>
-        <th>Departure Time</th>
-        <th>Arrival Time</th>
-        <th>Plane Make/Model</th>
-        <th>Economy Fare</th>
-        <th>Comfort Fare</th>
-        <th>First Class Fare</th>
-      </tr>
-      {% for flight in flights %}
-      <tr>
-        <td>{{flight.departure_datetime}}</td>
-        <td>{{flight.id}}</td>
-        <td>{{flight.departure_datetime}}</td>
-        <td>{{flight.arrival_datetime}}</td>
-        <td>Plane Make/Model</td>
-        <td style="padding:5px">Economy Fare<br/><a href='{% url 'reservations:confirmation' %}'>(Select)</a></td>
-        <td style="padding:5px">Comfort Fare<br/><a href='{% url 'reservations:confirmation' %}'>(Select)</a></td>
-        <td style="padding:5px">First Class Fare<br/><a href='{% url 'reservations:confirmation' %}'>(Select)</a></td>
-      </tr>
-      {% endfor %}
-    </table>
+    <form action='{% url 'reservations:confirmation' %}'  method='get'>
+      {% csrf_token %}
+      <table style="text-align:center">
+        <tr>
+          <th>Flight Date</th>
+          <th>Flight Number</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+          <th>Plane Make/Model</th>
+          <th>Economy Fare</th>
+          <th>Comfort Fare</th>
+          <th>First Class Fare</th>
+        </tr>
+        {% for flight in flights %}
+        <tr>
+          <td>{{flight.departure_datetime}}</td>
+          <td>{{flight.id}}</td>
+          <td>{{flight.departure_datetime}}</td>
+          <td>{{flight.arrival_datetime}}</td>
+          <td>Plane Make/Model</td>
+          <td style="padding:5px">Economy Fare
+            <input type="radio" id='flight_{{ flight.id }}_radio1' name='flight_class' value='{"flight_id":"{{ flight.id }}","class_id":"1"}'>
+          </td>
+          <td style="padding:5px">Comfort Fare
+            <input type="radio" id='flight_{{ flight.id }}_radio2' name='flight_class' value='{"flight_id":"{{ flight.id }}","class_id":"2"}'>
+          </td>
+          <td style="padding:5px">First Class Fare
+            <input type="radio" id='flight_{{ flight.id }}_radio3' name='flight_class' value='{"flight_id":"{{ flight.id }}","class_id":"3"}'>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      <!--
+       - What 'view' should the form information be submitted to? Should there be a 'submit' endpoint that handles the departure and return flight selections?
+       - Where should the logic for directing the User to the Confirmation or Return Flight be hosted?
+        - Conditional Rendering in Template?
+        - Function in Views.py that directs requester given a properties from SESSION
+
+      -->
+      <input type="hidden" name="number_of_passengers" value='{{ number_of_passengers }}'/>
+      <input type="hidden" name="round_trip" value='{{ round_trip }}'/>
+      <input type="hidden" name="return_date" value='{{ return_date }}'/>
+      <input type="hidden" name="arrival_airport" value='{{ arrival_airport }}'/>
+      <p>You may proceed when finished with your selection</p>
+      <input type="Submit" value="Submit">
+    </form>
     <p>User also chooses the Service Class associated with the flight</p>
     <p>If the user selected Round Trip, they would continue on to select options for the <a href="choose-return-flight.html">Return Flight</a></p>
     <p>Otherwise, user continues on to the <a href="flight-confirmation.html">Confirmation Page</a></p>

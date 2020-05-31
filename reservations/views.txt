@@ -1,13 +1,5 @@
-When a user selects a flight on the Departure Flight Page
+When a user selects a flight on the Departure Flight page:
 
-- Create a temporary reservation, marked with finalized = FALSE
-- Select a seat? Or just base the availability off TOTAL SEATS and TOTAL RESERVATIONS?
-- What about SEAT CLASS? How to cache requested SEAT CLASS on temporary reservation?
-
-User selects flight and class 
-Application creates non-finalized reservation
-Application continues to allow the user to select Return Flight if round_trip = 1
-Else the Application continues onto the next stage of the process
 
 ---------------------------------------
 
@@ -17,4 +9,4 @@ Steps for request processing:
  - The view recevies the HTTP request
  - An HTML template object is created with the template.loader() function
  - The context dictionary is created with the specified key values
- - The view makes an HttpResponse using HTML rendered by template.render() function
+ - The view makes an HttpResponse using HTML rendered by template.render(request,context) function
