@@ -74,27 +74,43 @@ If round_trip = FALSE
 def searchFlights(request):
 
     """
+
     Return results page back from search query
 
-     - Generate Session ID GUID for current flight on the client side
-     - Create Session database record that's tied to a single Reservation
+     - Generate SESSION GUID for current flight on the client side
+     - Create SESSION object that is a subclass of the RESERVATION class
      - Return Flight Results page w/given Session ID as URL Parameter
      - If no 'return' path is specified then assume 'depart'
-     - When reservation is 'finalized' the Session GUID should be invalidated
+     - When reservation is 'finalized'
+      - The SESSION GUID is invalidated
+      - Changes are committed as new RESERVATION object is created
 
     Follow-up concern:
 
      - If the user wants to update their reservation - should the same external GUID be presented?
      - Keep the SESSION object as a 'staging' reservation object and only commit changes to main
-     RESERVATION object when those changes are finalized
+      RESERVATION object when those changes are finalized
+
+    How to keep only one of the parameters visible when returning response to user? I want to present
+     only the session_id parameter but submit the other values to the database; and store on the SESSION object
+
+     - Option 1: Keep the extra URL parameters and ignore those parameters in actual response processing
+     - Option 2: Get SESSION ID from server in AJAX request and make secondary GET request using obtained SESSION ID
+     - Option 3: HttpResponseRedirect with URL parameter tacked on
     """
 
 
-    if request.method == "GET":
+    if request.method == "POST":
+
+        """
+        REQUEST contains SESSION GUID that contains the state of the search criteria
+        SESSION extends the RESERVATION object and the SESSION object merges with the RESERVATION object 
+         when changes are finalized
+        """
         flights = Flight.objects.filter(
-            arrival_airport=request.GET['arrival_airport'],
-            departure_airport=request.GET['departure_airport'],
-            departure_datetime__date=request.GET['departure_date']
+            arrival_airport=request.POST['arrival_airport'],
+            departure_airport=request.POST['departure_airport'],
+            departure_datetime__date=request.POST['departure_date']
         )
         # print('FLIGHT OBJECT: ' + str(flights[0].__dict__))
         # print('Departure Airport: ' + str(flights[0].departure_airport.__dict__))
@@ -102,13 +118,13 @@ def searchFlights(request):
         template = loader.get_template('reservations/search-flights.html')
         context = {
             'flights': flights,
-            'number_of_passengers': request.GET['number_of_passengers'],
-            'round_trip': request.GET['round_trip'],
-            'departure_date': request.GET['departure_date'],
-            'return_date': request.GET['return_date'],
-            'departure_airport': request.GET['departure_airport'],
-            'arrival_airport': request.GET['arrival_airport']
+            'number_of_passengers': request.POST['number_of_passengers'],
+            # 'round_trip': request.POST['round_trip'],
+            'departure_date': request.POST['departure_date'],
+            'return_date': request.POST['return_date'],
+            'departure_airport': request.POST['departure_airport'],
+            'arrival_airport': request.POST['arrival_airport']
         }
-        print(request.GET)
-        print('Flights object:  ' + str(flights[0].__dict__))
-        return HttpResponse(template.render(context, request))
+        # print(request.POST['session_guid'])
+        # print('Flights object:  ' + str(flights[0].__dict__))
+        return HttpResponseRedirect(template.render(context, request))

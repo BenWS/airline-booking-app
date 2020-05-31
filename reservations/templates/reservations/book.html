@@ -1,8 +1,35 @@
 <html>
+  <head>
+    <script>
+      /*
+      On the below - I couldn't easily find a front-end Javascript function that provides
+      out-of-the box UUID generation so I'm implementing this solution:
+
+      https://stackoverflow.com/questions/105034/how-to-create-guid-uuid
+
+      This is a mock web application so I'm more interested in POCing than finding the most
+      robust and secure UUID generation possible
+      */
+
+      function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+
+      function set_session_guid() {
+        document.form.session_guid.value = uuidv4();
+        return true;
+      }
+
+    </script>
+  </head>
   <body>
     <h1>Book Reservation</h1>
     <p>User completes this form:</p>
-    <form action="{% url 'reservations:search-flights' %}">
+    <form name = "form" method="post" onsubmit="set_session_guid();" action="{% url 'reservations:search-flights' %}">
+      {% csrf_token %}
       <label for="departure_airport">Departing From</label><br/>
       <input type="text" id="departure_airport" name="departure_airport"><br/>
       <label for="arrival_airport">Arriving To</label><br/>
@@ -15,6 +42,7 @@
       <input type="text" id="number_of_passengers" name = "number_of_passengers"/><br/>
       <label for="round_trip">Round_Trip?</label>
       <input type="checkbox" id="round_trip" name="round_trip"><br/>
+      <input type="hidden" id="session_guid" name ="session_guid" value="test"/>
       <input type="submit" value="Submit">
     </form>
     <p>After completing the form:</p>
