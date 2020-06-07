@@ -8,5 +8,6 @@ urlpatterns = [
     path('sign-in', views.userLogin, name ='sign-in'),
     path('book', views.bookReservation, name = 'book'),
     path('search-flights', views.searchFlights, name = 'search-flights'),
+    path('flight-search-results',views.searchResults,name='search-results'),
     path('confirmation', views.chooseFlight, name = 'confirmation')
 ]
