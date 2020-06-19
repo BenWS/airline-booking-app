@@ -49,20 +49,89 @@ def bookReservation(request):
         return render(request, "reservations/book.html")
 
 
-def chooseFlight(request):
-    print('Request: ' + str(request.GET['flight_class']))
-    template = loader.get_template('reservations/confirmation.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
+# def chooseFlight(request):
+#     """
+#     Considerations:
+#      - Where to cache the user's flight selection?
+#       - Should the Reservation_Staging object carry the flight selection information?
+#       - Should I create a separate 'Search Session' object and store the search session information there, rather?
+#        I.e. keep the SEARCH information separate from the RESERVATION information
+#     """
+#
+#     # User selects a flight and a Reservation_Staging object is created
+#     # If round_trip = on, the user is taken to the Departure page
+#     # Else, user is taken to the Confirmation Page
+#
+#     template = loader.get_template('reservations/choose-flight.html')
+#     context = {'session_guid':request.GET['session_guid']}
+#     return HttpResponse(template.render(context, request))
 
-def searchResults(request):
+def submitFlightChoice(request):
+    """
+    Reservation --> Passenger --> PassengerSeat --> PlaneSeat
+    """
+    reservationSession = ReservationSession.objects.get(session_guid=request.POST['session_guid'])
+
+    """
+       <QueryDict: {'csrfmiddlewaretoken': ['CraBFMu1EwH6cG14J6nzmEv1ZlyO44rkQsQHncbSqaFfvFxCcBQQSfOUWBpQKfYP'], 'flight_class': ['{"flight_id":"1","class_id":"1"}']
+       , 'number_of_passengers': ['2'], 'round_trip': ['on'], 'return_date': ['May 24, 2020'], 'arrival_airport': ['Airport object (1)'], 'session_guid': ['b111ee78-
+       6d18-4645-823b-15083bc62690']}>
+    """
+
+    print(str(request.POST))
+    prompt()
+
+    # if staged reservation hasn't been created for session
+    # create reservation staging object and link to current session
+    """
+    reservation_staging = ReservationSession.objects.create(
+        customer = request.user,
+        departure_flight = request.POST['flight_class'],
+        return_flight = json.loads(request.POST['flight_class']).flight_id,
+        number_of_passengers = reservationSession.number_of_passengers,
+        round_trip = reservationSession.round_trip
+    )
+    """
+
+    # else
+    # update existing staged reservation
+    """
+    r = reservation_staging.objects.get(session_guid = ...)
+    r.field_a = 
+    r.field_b = 
+    r.field_c = 
+    r.save()    
+    """
+
+    # create passenger objects tied to object
+    # assign passenger objects to 'reservation seat'
+    # assign 'reservation seat' objects to 'plane seat'
+
+    # to research: how to get all the passengers associated with a given reservation?
+
+
+    if reservationSession.round_trip == "on":
+        #redirect to departure flight page
+        return HttpResponse('Select Departure Flight')
+    else:
+        #redirect to flight confirmation page
+        return HttpResponse('Submit Flight Choice Page')
+
+def reservationConfirmation(request):
+    pass
+
+def reservationCheckout(request):
+    pass
+
+def reservationFinalConfirmation(request):
+    pass
+
+
+
+def chooseFlight(request):
     #get reservation_staging object
-    reservation_staging = Reservation_Staging.objects.get(session_guid=request.GET['session_guid'])
-    print(reservation_staging.session_guid)
-    print(reservation_staging.arrival_airport)
-    print(reservation_staging.departure_airport)
-    print(reservation_staging.departure_date)
-    prompt("Press any key to continue...")
+
+    reservation_staging = ReservationSession.objects.get(session_guid=request.GET['session_guid'])
 
     #get flights that match the reservation_staging search criteria
     flights = Flight.objects.filter(
@@ -71,10 +140,7 @@ def searchResults(request):
         departure_datetime__date=reservation_staging.departure_date
     )
 
-    print(flights)
-    prompt("Press any key to continue...")
-
-    template = loader.get_template('reservations/search-flights.html')
+    template = loader.get_template('reservations/choose-flight.html')
     context = {
         'flights': flights,
         'number_of_passengers': reservation_staging.number_of_passengers,
@@ -82,7 +148,8 @@ def searchResults(request):
         'departure_date': reservation_staging.departure_date,
         'return_date': reservation_staging.return_date,
         'departure_airport':reservation_staging.departure_airport,
-        'arrival_airport': reservation_staging.arrival_airport
+        'arrival_airport': reservation_staging.arrival_airport,
+        'session_guid':request.GET['session_guid']
     }
     # return flights to user that match criteria on the reservation_staging object
     return HttpResponse(template.render(context, request))
@@ -104,7 +171,9 @@ If round_trip = FALSE
 def searchFlights(request):
 
     """
+    """
 
+    """
     Return results page back from search query
 
      -- Check that user is logged-in
@@ -149,14 +218,10 @@ def searchFlights(request):
     """
 
     if request.method == "POST":
-        #get the current user
-        print(request.user.id)
-        print(request.POST)
-        prompt("...")
 
         #create reservation_staging object
-        Reservation_Staging.objects.create(
-            reservation=None,
+        ReservationSession.objects.create(
+            reservation_staging=None,
             customer= Customer.objects.get(pk=request.user.id),
             departure_airport= Airport.objects.get(pk=request.POST['departure_airport']),
             arrival_airport=Airport.objects.get(pk=request.POST['arrival_airport']),
@@ -169,6 +234,6 @@ def searchFlights(request):
         )
 
         #redirect user to search results page with SESSION GUID as URL parameter
-        return HttpResponseRedirect(reverse('reservations:search-results') + '?session_guid=' + request.POST['session_guid'])
+        return HttpResponseRedirect(reverse('reservations:choose-flight') + '?session_guid=' + request.POST['session_guid'])
 
 
