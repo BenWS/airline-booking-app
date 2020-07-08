@@ -9,7 +9,7 @@
   <body>
     <h1>Choose Departure Flight</h1>
     <p>User chooses one of the available flights</p>
-    <form action='{% url 'reservations:submit-flight-choice' %}'  method='post'>
+    <form action='{% url 'reservations:submit-departure-flight-choice' %}'  method='post'>
       {% csrf_token %}
       <table style="text-align:center">
         <tr>
@@ -24,19 +24,22 @@
         </tr>
         {% for flight in flights %}
         <tr>
-          <td>{{flight.departure_datetime}}</td>
-          <td>{{flight.id}}</td>
-          <td>{{flight.departure_datetime}}</td>
-          <td>{{flight.arrival_datetime}}</td>
+          <td>{{flight.flight.departure_datetime}}</td>
+          <td>{{flight.flight.id}}</td>
+          <td>{{flight.flight.departure_datetime}}</td>
+          <td>{{flight.flight.arrival_datetime}}</td>
           <td>Plane Make/Model</td>
-          <td style="padding:5px">Economy Fare
-            <input type="radio" id='flight_{{ flight.id }}_radio1' name='flight_class' value='{"flight_id":"{{ flight.id }}","class_id":"1"}'>
+          <td style="padding:5px">
+            <label style="display:inline-block" for="flight_{{ flight.id }}_radio1">Economy Fare<br/>${{ flight.flight_retail_by_service_class.5 }}/seat</label>
+            <input type="radio" id='flight_{{ flight.id }}_radio1' name='flight_class' value='{"flight_id":"{{ flight.flight.id }}","class_id":"5"}'>
           </td>
-          <td style="padding:5px">Comfort Fare
-            <input type="radio" id='flight_{{ flight.id }}_radio2' name='flight_class' value='{"flight_id":"{{ flight.id }}","class_id":"2"}'>
+          <td style="padding:5px">
+            <label style="display:inline-block" for="flight_{{ flight.id }}_radio2">Comfort Fare<br/>${{ flight.flight_retail_by_service_class.4 }}/seat</label>
+            <input type="radio" id='flight_{{ flight.id }}_radio2' name='flight_class' value='{"flight_id":"{{ flight.flight.id }}","class_id":"4"}'>
           </td>
-          <td style="padding:5px">First Class Fare
-            <input type="radio" id='flight_{{ flight.id }}_radio3' name='flight_class' value='{"flight_id":"{{ flight.id }}","class_id":"3"}'>
+          <td style="padding:5px">
+            <label style="display:inline-block" for="flight_{{ flight.id }}_radio1">First Class Fare<br/>${{ flight.flight_retail_by_service_class.3 }}/seat</label>
+            <input type="radio" id='flight_{{ flight.id }}_radio3' name='flight_class' value='{"flight_id":"{{ flight.flight.id }}","class_id":"3"}'>
           </td>
         </tr>
         {% endfor %}

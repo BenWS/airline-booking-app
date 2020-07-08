@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <style>
+      td,th,table {
+        border:1px solid black;
+        text-align:center
+      }
+
+      .flight-details {
+        margin-top:40px;
+        margin-bottom:40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Check-out</h1>
+      <form>
+        <div class="flight-details">
+          <h2>Departure Flight</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Flight Number</th>
+                <th>Plane Model</th>
+                <th>Departure Date/Time</th>
+                <th>Arrival Date/Time</th>
+                <th># of Passengers</th>
+                <th>Service Class</th>
+                <th>Cost of Flight (US $)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td>DL 1930</td>
+              <td>Boeing 737</td>
+              <td>July 3rd at 11:00am EST</td>
+              <td>July 3rd at 2:15pm EST</td>
+              <td>2</td>
+              <td>Comfort</td>
+              <td>$2000</td>
+            </tbody>
+          </table>
+          <h2>Departure Flight Passenger Information</h2>
+          <fieldset style="width:50%">
+            <legend>Seat Assignment #1 (Position 1A)</legend>
+            <label for="title_dept_1">Title:</label>
+            <select id="title_dept_1" name="title_dept_1">
+              <option value="1">Mrs.</option>
+              <option value="1">Ms.</option>
+              <option value="2">Mr.</option>
+              <option value="3">Dr.</option>
+            </select><br/>
+            <br/><label for="first_name_dept_1">First Name:</label><br/>
+            <input type="text" id="first_name_dept_1" name="first_name_dept_1"><br/>
+            <br/><label for="last_name_dept_1">Last Name:</label><br/>
+            <input type="text" id="last_name_dept_1" name="last_name_dept_1"><br/>
+          </fieldset>
+          <br/><fieldset style="width:50%">
+            <legend>Seat Assignment #2 (Position 1B)</legend>
+            <label for="title_dept_2">Title:</label>
+            <select id="title_dept_2" name="title_dept_2">
+              <option value="1">Mrs.</option>
+              <option value="1">Ms.</option>
+              <option value="2">Mr.</option>
+              <option value="3">Dr.</option>
+            </select><br/>
+            <br/><label for="first_name_dept_2">First Name:</label><br/>
+            <input type="text" id="first_name_dept_2" name="first_name_dept_2"><br/>
+            <br/><label for="last_name_dept_2">Last Name:</label><br/>
+            <input type="text" id="last_name_dept_2" name="last_name_dept_2"><br/>
+          </fieldset>
+        </div>
+        <div class="flight-details">
+          <h2>Return Flight</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Flight Number</th>
+                <th>Plane Model</th>
+                <th>Return Date/Time</th>
+                <th>Arrival Date/Time</th>
+                <th># of Passengers</th>
+                <th>Service Class</th>
+                <th>Cost of Flight (US $)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td>DL 1930</td>
+              <td>Boeing 737</td>
+              <td>July 3rd at 11:00am EST</td>
+              <td>July 3rd at 2:15pm EST</td>
+              <td>2</td>
+              <td>Comfort</td>
+              <td>$2000</td>
+            </tbody>
+          </table>
+          <h2>Return Flight Passenger Information</h2>
+          <fieldset style="width:50%">
+            <legend>Seat Assignment #1 (Position 1A)</legend>
+            <label for="title_ret_1">Title:</label>
+            <select id="title_ret_1" name="title_ret_1">
+              <option value="1">Mrs.</option>
+              <option value="1">Ms.</option>
+              <option value="2">Mr.</option>
+              <option value="3">Dr.</option>
+            </select><br/>
+            <br/><label for="first_name_ret_1">First Name:</label><br/>
+            <input type="text" id="first_name_ret_1" name="first_name_ret_1"><br/>
+            <br/><label for="last_name_ret_1">Last Name:</label><br/>
+            <input type="text" id="last_name_ret_1" name="last_name_ret_1"><br/>
+          </fieldset>
+          <br/><fieldset style="width:50%">
+            <legend>Seat Assignment #2 (Position 1B)</legend>
+            <label for="title_ret_2">Title:</label>
+            <select id="title_ret_2" name="title_ret_2">
+              <option value="1">Mrs.</option>
+              <option value="1">Ms.</option>
+              <option value="2">Mr.</option>
+              <option value="3">Dr.</option>
+            </select><br/>
+            <br/><label for="first_name_ret_2">First Name:</label><br/>
+            <input type="text" id="first_name_ret_2" name="first_name_ret_2"><br/>
+            <br/><label for="last_name_ret_2">Last Name:</label><br/>
+            <input type="text" id="last_name_ret_2" name="last_name_ret_2"><br/>
+          </fieldset>
+        </div>
+        <div id="payment">
+          <h2>Payment Information</h2>
+          <fieldset style="width:50%">
+            <p>You will be charged a total of $4000 at payment submission.</p>
+            <legend>Credit Card</legend>
+            <label for="credit_card_number">Credit Card Number</label></br>
+            <input id="credit_card_number" type="text"/>
+            <br/><label for="security_code">3-digit Security Code</label></br>
+            <input id="security_code" type="text"/>
+            <br/><label for="expiration_date">Expiration Date</label></br>
+            <input id="expiration_date" type="date"/>
+          </fieldset>
+          <br/><fieldset style="width:50%">
+            <legend>Billing Address</legend>
+            <label for="street_address">Street Address</label><br/>
+            <input id="street_address" type="text"/>
+            <br/><label for="city">City</label><br/>
+            <input id="city" type="text"/>
+            <br/><label for="state">State</label><br/>
+            <input id="state" type="text"/>
+            <br/><label for="zip">Zip Code</label><br/>
+            <input id="zip" type="text"/>
+          </fieldset>
+        </div>
+        <br/><input type="submit" value="Submit Payment"/>
+      </form>
+  </body>
+</html>

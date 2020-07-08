@@ -1,0 +1,165 @@
+<!--
+**Description**
+
+This page is essentially a replication of the Initial Flight Confirmation page.
+
+The main difference being there isn't a 'Proceed to Check-out' option at the bottom of the
+ of the page until the user updates Flight or Flight Seat information. After that happens
+ the user will be notified that re-checking-out is necessary.
+
+**Flight Information Columns**
+
+Is Departure/Return?
+Flight Number
+Departure Time
+Arrival Time
+Update Flight Choice
+  (Hyperlink for updating Flight in question)
+
+**Seat Information Columns**
+
+Passenger First and Last Name
+Seat Serial Number
+Seat Positional Number
+Seat Class
+Update Seat Choice
+    (Hyperlink for adding new passengers)
+-->
+<html>
+  <head>
+    <style>
+      td,th,table {
+        border:1px solid black;
+        text-align:center
+      }
+
+      .flight-details {
+        margin-top:40px;
+        margin-bottom:40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Trip Details</h1>
+    <div class="flight-details">
+      <h2>Departure Flight</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Flight Number</th>
+            <th>Plane Model</th>
+            <th>Departure Date/Time</th>
+            <th>Arrival Date/Time</th>
+            <th># of Passengers</th>
+            <th>Service Class</th>
+            <th>Cost of Flight (US $)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>DL 1930</td>
+          <td>Boeing 737</td>
+          <td>July 3rd at 11:00am EST</td>
+          <td>July 3rd at 2:15pm EST</td>
+          <td>2</td>
+          <td>Comfort</td>
+          <td>$2000</td>
+          <td><button>Change Flight</button></td>
+        </tbody>
+      </table>
+      <h2>Departure Flight Seats</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Assignment #</th>
+            <th>Service Class</th>
+            <th>Cabin Position</th>
+            <th>Seat Cost (US $)</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>First Class</td>
+            <td>1A</td>
+            <td>$1000</td>
+            <td><button>Change</button></td>
+            <td><button>Delete</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>First Class</td>
+            <td>1B</td>
+            <td>$1000</td>
+            <td><button>Change</button></td>
+            <td><button>Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>You may click <a href="">here</a> to add a new passenger</p>
+      <!--To Do: Add logic that allows the user to add/delete passengers-->
+    </div>
+    <div class="flight-details">
+    <h2>Return Flight</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Flight Number</th>
+            <th>Plane Model</th>
+            <th>Departure Date/Time</th>
+            <th>Arrival Date/Time</th>
+            <th># of Passengers</th>
+            <th>Service Class</th>
+            <th>Cost of Flight (US $)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>DL 1930</td>
+          <td>Boeing 737</td>
+          <td>July 3rd at 11:00am EST</td>
+          <td>July 3rd at 2:15pm EST</td>
+          <td>2</td>
+          <td>Comfort</td>
+          <td>$2000</td>
+          <td><button>Change Flight</button></td>
+        </tbody>
+      </table>
+      <h2>Return Flight Seats</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Assignment #</th>
+            <th>Service Class</th>
+            <th>Cabin Position</th>
+            <th>Seat Cost (US $)</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>First Class</td>
+            <td>1A</td>
+            <td>$1000</td>
+            <td><button>Change</button></td>
+            <td><button>Delete</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>First Class</td>
+            <td>1B</td>
+            <td>$1000</td>
+            <td><button>Change</button></td>
+            <td><button>Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>You may click <a href="">here</a> to add a new passenger</p>
+    </div>
+    <p><button>Proceed to Check-out</button></p>
+  </body>
+</html>
