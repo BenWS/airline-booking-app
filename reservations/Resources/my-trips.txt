@@ -1,0 +1,62 @@
+General form of the outlines below:
+
+user visits {root}
+user clicks/visits [{button name}]:{url path}
+{view function} returns/redirects to {template path|url path}
+...
+...
+{root view function} returns {root}
+
+
+Action Path for 'Update Flight Seat':
+
+  user visits /my-trips/edit
+  user clicks 'Update Seat' link: edit/{flight_type}-flight-seat
+  MyTrips_GetEditFlightSeat() returns /my-trips/edit-flight-seat.html
+  user clicks 'Submit' button: edit/{flight_type}-flight-seat/submit
+  MyTrips_SubmitEditFlightSeat() redirects to /my-trips/edit
+  MyTrips_Edit() returns /my-trips/edit.html
+
+Action Path for 'Add Flight Seat':
+
+  user visits /my-trips/edit
+  user clicks 'Change' under Flight Details: add/{flight_type}-flight-seat
+  MyTrips_GetAddFlightSeat() returns my-trips/add-flight-seat.html
+  user clicks 'Submit' button: add/{flight_type}-flight-seat/submit
+  MyTrips_SubmitAddFlightSeat() redirects to my-trips/edit
+  MyTrips_GetEdit() returns /my-trips/edit.html
+
+Action Path for 'Submit Updates':
+
+  user visits /my-trips/edit
+  user clicks 'Submit Updates': /my-trips/edit-check-out
+  MyTrips_GetEditCheckOut() returns /my-trips/edit-check-out
+  user clicks 'Submit' button: /my-trips/edit-check-out/submit
+  MyTrips_SubmitEditCheckOut() redirects to /my-trips/final-edit-confirmation
+MyTrips_GetFinalEditConfimation() returns views/update-confirmation.html
+
+Action Path for Trip 'Edit' Page:
+
+user visits /my-trips
+getMyTrips() returns /my-trips/my-trips.html
+user clicks /my-trips/view?reservation_id={reservation_id}
+getMyTrips_View() returns /my-trips/view.html
+user clicks 'Edit' option on /view page: /my-trips/edit?session_guid={session_guid}
+getMyTrips_Edit() returns /my-trips/edit.html
+
+Action Path for 'Change Flight':
+
+  user clicks 'Edit' option on /my-trips/view: /my-trips/edit/submit
+  myTrips_View_submitEdit() redirects to myTrips_getEdit()
+  myTrips_getEdit() returns /my-trips/edit.html
+  user clicks 'Change Flight' option on /edit page: /my-trips/edit/{flight_type}-flight/search
+  MyTrips_GetSearchFlight() returns /my-trips/search.html
+  user clicks 'Search' on /search: /search/submit
+  MyTrips_SubmitSearchFlight() redirects to /my-trips/edit/{flight_type}-flight/select
+  MyTrips_GetSelectFlight() returns /my-trips/select-flight.html
+  user clicks 'Submit' on /select: /my-trips/edit/{flight_type}-flight/select/submit
+  MyTrips_SubmitSelectFlight() redirects to /my-trips/edit
+  MyTrips_GetEdit() returns /my-trips/edit.html
+
+
+

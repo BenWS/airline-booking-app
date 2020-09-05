@@ -14,7 +14,7 @@
   </head>
   <body>
     <h1>Check-out</h1>
-      <form action="{% url 'reservations:booking-check-out/submit' %}" method="post">
+      <form action="{% url 'reservations:my-trips/edit-check-out/submit' %}" method="post">
         {% csrf_token %}
         <div class="flight-details">
           <h2>Departure Flight</h2>

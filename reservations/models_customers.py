@@ -42,6 +42,7 @@ class Reservation_Main(Reservation_Abstract):
 
 class Reservation_Staging(Reservation_Abstract):
     reservation_main = models.ForeignKey(Reservation_Main, null=True, on_delete=models.CASCADE)
+    session_guid = models.CharField(max_length=100, null=True)
 
 class ReservationSession(models.Model):
     """
@@ -52,9 +53,9 @@ class ReservationSession(models.Model):
     departure_airport = models.ForeignKey(Airport, on_delete=models.PROTECT, null=True, related_name="+")
     arrival_airport = models.ForeignKey(Airport, on_delete=models.PROTECT, null=True, related_name="+")
     session_guid = models.CharField(max_length=100, null=False)
-    departure_date = models.DateField(auto_now=False)
-    return_date = models.DateField(auto_now=False)
-    number_of_passengers = models.PositiveIntegerField(blank=True)
+    departure_date = models.DateField(auto_now=False, null=True)
+    return_date = models.DateField(auto_now=False, null=True)
+    number_of_passengers = models.PositiveIntegerField(null=True)
     round_trip = models.CharField(max_length=100, null=True)
 
 class Passenger_Abstract(models.Model):
@@ -77,3 +78,13 @@ class FlightRetail(models.Model):
     current_retail = models.DecimalField(max_digits=6,decimal_places=2)
     service_class = models.ForeignKey(ServiceClass, on_delete=models.CASCADE,related_name="+")
     flight = models.ForeignKey(Flight,on_delete=models.CASCADE,related_name="+")
+
+class SalesTransaction(models.Model):
+    """
+    Submitted at customer check
+    """
+    amount = models.DecimalField(max_digits=6,decimal_places=2)
+    reservation = models.ForeignKey(Reservation_Main,on_delete=models.PROTECT)
+    passenger = models.ForeignKey(Passenger_Main,on_delete=models.PROTECT)
+    flight_type = models.CharField(max_length=100, blank=False)
+    log_time = models.DateField(auto_now=True)

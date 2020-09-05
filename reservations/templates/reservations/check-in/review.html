@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <style>
+            td,th,table {
+                border:1px solid black;
+                text-align:center
+              }
+
+              .flight-details {
+                margin-top:40px;
+                margin-bottom:40px;
+              }
+        </style>
+    </head>
+    <body>
+        <h1>Check-in for Flight #1</h1>
+        <h2>Flight Details</h2>
+        <table>
+            <thead>
+              <tr>
+                <th>Flight Number</th>
+                <th>Plane Model</th>
+                <th>Departing From</th>
+                <th>Arriving At</th>
+                <th>Departure Date/Time</th>
+                <th>Arrival Date/Time</th>
+                <th># of Passengers</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Boeing 737</td>
+                    <td>ATL</td>
+                    <td>BOS</td>
+                    <td>May 23, 2020, noon</td>
+                    <td>May 23, 2020, 3 p.m.</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Passenger Details</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Assignment #</th>
+                    <th>Passenger Name</th>
+                    <th>Service Class</th>
+                    <th>Cabin Position</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Flyer Flyerson</td>
+                    <td>Economy</td>
+                    <td>1A</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Passenger McAirline</td>
+                    <td>Economy</td>
+                    <td>1A</td>
+                  </tr>
+            </tbody>
+        </table>
+        <br>
+        <h2>Boarding Passes</h2>
+        <form method="post" action="{% url 'reservations:check-in/review/submit' %}">
+            {% csrf_token %}
+            <label>How would you prefer to receive your boarding passes?</label><br><br>
+            <input type="radio" id="email_radio" name="delivery_method" value="email">
+            <label for="email_address">Email</label>
+            <input type="text" id="email_address" name="email_address" placeholder="youremail@domain.com"><br>
+            <input type="radio" id="text_message" name="delivery_method" value="text_message">
+            <label for="text_message">Text Message via SMS</label>
+            <input type="text" id="phone_number" name="phone_number" placeholder="(123) 456-7890"><br><br>
+            <input type="hidden" name="flight_id" value="{{ flight_id }}">
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

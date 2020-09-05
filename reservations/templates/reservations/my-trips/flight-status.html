@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <style>
+            td {
+                padding: 15px 0px 15px 0px
+            }
+
+            .table-details {
+                padding-left:30px
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Flight Status</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Flight</td>
+                    <td class="table-details">DL 1930 (Boeing 737)</td>
+                </tr>
+                <tr>
+                    <td>Departing From</td>
+                    <td class="table-details">Atlanta Hartsfield-Jackson International Airport (ATL) at 12:00pm EST</td>
+                </tr>
+                <tr>
+                    <td>Arriving At</td>
+                    <td class="table-details">Boston Logan International Airport (BOS) at 3:00pm EST</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td class="table-details">In Transit</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Click <a href="{% url 'reservations:my-trips ' %}">here</a> to return to view of upcoming trips.</p>
+        <p>Click <a href="{% url 'reservations:index' %}">here</a> to return to home page.</p>
+    </body>
+</html>

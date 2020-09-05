@@ -1,0 +1,15 @@
+Exclude flights from results for flight update, that are the current flight
+Provide notes on the 'submit' and 'get' view name conventions I've established.
+ Also - what are some ways I could better this convention, and utilize already
+ developed strategies (read up on this)?
+How can I set up the debugger to where it highlights the method corresponding to the
+ page I'm visiting in the web browser?
+Multi-Dict key error
+Allow customer to update selected flight from initial reservation booking sequence
+Additional logic needed to ensure only *upcoming* trips are displayed
+Only return flights that have seats available
+There should not be an empty table for customers w/o reservations on the My Trips page
+should a customer be allowed to book a reservation on the same flight twice?
+explore changing the session GUID generation to occur on the client side
+I need to move the session_guid off the ReservationSession entirely and onto Reservation_Staging
+Include action on /edit page that allows user to cancel out of flight update sequence

@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <style>
+    table, th, td {
+      border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>{{ flight_type|capfirst }} Flight Update</h1>
+    <p>Flights available on {{flights.0.departure_time|date:"D" }}. {{flights.0.departure_time|date:"SHORT_DATE_FORMAT" }}</p>
+    <form action='{% url 'reservations:my-trips/select-flight/submit' flight_type %}'  method='post'>
+      {% csrf_token %}
+      <table style="text-align:center">
+        <tr>
+          <th>Flight Number</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+          <th>Plane Make/Model</th>
+          <th>New Total Fare</th>
+        </tr>
+        {% for flight in flights %}
+        <tr>
+          <td>{{flight.flight_id}}</td>
+          <td>{{flight.departure_time|date:"P"}}</td>
+          <td>{{flight.arrival_time|date:"P"}}</td>
+          <td>{{ flight.plane_make }} {{ flight.plane_model }}</td>
+          <td style="padding:5px">
+            <label style="display:inline-block" for="flight_{{ flight.id }}_radio">{{flight.new_flight_cost}} ({{flight.flight_cost_difference}})</label>
+            <input type="radio" id='flight_{{ flight.id }}_radio' name='flight_id' value='{{ flight.flight_id }}'>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      <input type="hidden" name="session_guid" value="{{ session_guid }}">
+      <br>
+      <input type="Submit" value="Submit">
+    </form>
+  </body>
+</html>

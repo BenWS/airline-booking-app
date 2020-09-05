@@ -1,0 +1,13 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form method="get" action="{% reservations:flight-status/view' %}">
+            <label for="flight_id">Flight #</label>
+            <input type="text" id="flight_id", name="flight_id">
+            <input type="submit" value="Search Flight">
+        </form>
+        <p>Click <a href="{% url 'reservations:index' %}">here</a> to return to home page.</p>
+    </body>
+</html>

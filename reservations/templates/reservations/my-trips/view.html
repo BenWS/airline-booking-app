@@ -54,7 +54,7 @@ Update Seat Choice
     </style>
   </head>
   <body>
-    <h1>Flight Confirmation</h1>
+    <h1>View Trip Reservation</h1>
     <div class="flight-details">
       <h2>Departure Flight</h2>
       <table>
@@ -66,7 +66,6 @@ Update Seat Choice
             <th>Arrival Date/Time</th>
             <th># of Passengers</th>
             <th>Cost of Flight (US $)</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +75,6 @@ Update Seat Choice
           <td>{{ departure_flight_summary.arrival_datetime }}</td>
           <td>{{ departure_flight_summary.number_of_passengers }}</td>
           <td>{{ departure_flight_summary.total_cost_flight }}</td>
-          <td><button>Change Flight</button></td>
         </tbody>
       </table>
       <h2>Departure Flight Seats</h2>
@@ -87,8 +85,6 @@ Update Seat Choice
             <th>Service Class</th>
             <th>Cabin Position</th>
             <th>Seat Cost (US $)</th>
-            <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -98,29 +94,10 @@ Update Seat Choice
             <td>{{ passenger.service_class }}</td>
             <td>{{ passenger.cabin_position }}</td>
             <td>{{ passenger.current_retail }}</td>
-            <td>
-              <form style="display:inline" method="get" action="{% url 'reservations:update-flight-seat-reservation/departure' %}">
-                {% csrf_token %}
-                <input type="hidden" name="session_guid" value="{{ session_guid }}">
-                <input type="hidden" name="passenger_id" value="{{ passenger.passenger_id }}">
-                <input type="submit" value="Change">
-              </form>
-            </td>
-            <td>
-              <form style="display:inline" action="{% url 'reservations:flight-confirmation/departure/submit-delete' %}" method="post">
-                {% csrf_token %}
-                <input type ="hidden" name="session_guid" value="{{ session_guid }}">
-                <input type ="hidden" name="passenger_id" value="{{ passenger.passenger_id }}">
-                <input type ="hidden" name="flight" value="{{ departure_flight_summary.flight_id }}">
-                <input type="submit"  value="Delete" />
-              </form>
-            </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      <p>You may click <a href=" {% url 'reservations:add-flight-seat-reservation/departure' %}?session_guid={{ session_guid }}">here</a> to add a new passenger</p>
-      <!--To Do: Add logic that allows the user to add/delete passengers-->
     </div>
     <div class="flight-details">
     <h2>Return Flight</h2>
@@ -133,7 +110,6 @@ Update Seat Choice
             <th>Arrival Date/Time</th>
             <th># of Passengers</th>
             <th>Cost of Flight (US $)</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -143,7 +119,6 @@ Update Seat Choice
           <td>{{ return_flight_summary.arrival_datetime }}</td>
           <td>{{ return_flight_summary.number_of_passengers }}</td>
           <td>{{ return_flight_summary.total_cost_flight }}</td>
-          <td><button>Change Flight</button></td>
         </tbody>
       </table>
       <h2>Return Flight Seats</h2>
@@ -154,8 +129,6 @@ Update Seat Choice
             <th>Service Class</th>
             <th>Cabin Position</th>
             <th>Seat Cost (US $)</th>
-            <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -165,33 +138,12 @@ Update Seat Choice
             <td>{{ passenger.service_class }}</td>
             <td>{{ passenger.cabin_position }}</td>
             <td>{{ passenger.current_retail }}</td>
-            <td>
-              <form style="display:inline" method="get" action="{% url 'reservations:update-flight-seat-reservation/return' %}">
-                {% csrf_token %}
-                <input type="hidden" name="session_guid" value="{{ session_guid }}">
-                <input type="hidden" name="passenger_id" value="{{ passenger.passenger_id }}">
-                <input type="submit" value="Change">
-              </form>
-            </td>
-            <td>
-              <form style="display:inline" action="{% url 'reservations:flight-confirmation/return/submit-delete' %}" method="post">
-                {% csrf_token %}
-                <input type ="hidden" name="session_guid" value="{{ session_guid }}">
-                <input type ="hidden" name="passenger_id" value="{{ passenger.passenger_id }}">
-                <input type ="hidden" name="flight" value="{{ return_flight_summary.flight_id }}">
-                <input type="submit"  value="Delete" />
-              </form>
-            </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      <p>You may click <a href=" {% url 'reservations:add-flight-seat-reservation/return' %}?session_guid={{ session_guid }}">here</a> to add a new passenger</p>
-      <!--To Do: Add logic that allows the user to add/delete passengers-->
     </div>
-    <form method="get" action="{% url 'reservations:booking-check-out' %}" style="display:inline-block">
-      <input type="hidden" name="session_guid" value="{{ session_guid }}">
-      <input type="submit" value="Proceed to Check-out">
-    </form>
+    <p>Click <a href="{% url 'reservations:my-trips/view/submit-edit' %}?reservation_id={{ reservation_id }}">here</a> to edit the current reservation.</p>
+    <p>Click <a href="{% url 'reservations:my-trips' %}">here</a> to return to view your scheduled trips.</p>
   </body>
 </html>

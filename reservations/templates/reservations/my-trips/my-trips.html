@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <style>
+            table, tr, td, th {
+                border: 1px solid black;
+                text-align: center
+            }
+        </style>
+    </head>
+    <body>
+        <h1>My Upcoming Trips</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Reservation #</th>
+                    <th></th>
+                    <th>Flight #</th>
+                    <th>Departure or Return</th>
+                    <th>Flight Date and Time</th>
+                    <th>Flight Plane Model</th>
+                    <th>Departure Airport</th>
+                    <th>Arrival Airport</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                {% if reservation.departure_flight_id and reservation.return_flight_id %}
+                <tr>
+                    <td rowspan="2">{{ reservation.reservation_id }}</td>
+                    <td rowspan="2">
+                        <form style="display:inline-block" method="get" action="my-trips/view">
+                            <input type="hidden" name="reservation_id" value="{{ reservation.reservation_id }}">
+                            <input type="submit" value="Trip Details">
+                        </form>
+                    </td>
+                    <td>{{ reservation.departure_flight_id }}</td>
+                    <td>Departure</td>
+                    <td>{{ reservation.departure_flight_datetime }}</td>
+                    <td>{{ reservation.departure_flight_plane_model }} {{ reservation.departure_flight_plane_make }}</td>
+                    <td>{{ reservation.departflight_departure_airport }}</td>
+                    <td>{{ reservation.departflight_arrival_airport }}</td>
+                    <td>
+                        <form style="display:inline-block" method="get" action="{% url 'reservations:my-trips/flight-status' %}">
+                            <input type="hidden" name="flight_id"   value="{{ reservation.departure_flight_id }}">
+                            <input type="submit" value="View Flight Status">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ reservation.return_flight_id }}</td>
+                    <td>Return</td>
+                    <td>{{ reservation.return_flight_datetime }}</td>
+                    <td>{{ reservation.return_flight_plane_model }} {{ reservation.return_flight_plane_make }}</td>
+                    <td>{{ reservation.returnflight_departure_airport }}</td>
+                    <td>{{ reservation.returnflight_arrival_airport }}</td>
+                    <td>
+                        <form style="display:inline-block" method="get" action="{% url 'reservations:my-trips/flight-status' %}">
+                            <input type="hidden" name="flight_id" value="{{ reservation.return_flight_id }}">
+                            <input type="submit" value="View Flight Status">
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td>{{ reservation.reservation_id }}</td>
+                    <td>
+                        <form style="display:inline-block" method="get" action="my-trips/view">
+                            <input type="hidden" name="flight_id"  value="{{ reservation.reservation_id }}">
+                            <input type="submit" value="Trip Details">
+                        </form>
+                    </td>
+                    <td>{{ reservation.departure_flight_id }}</td>
+                    <td>Departure</td>
+                    <td>{{ reservation.departure_datetime }}</td>
+                    <td>{{ reservation.departure_flight_plane_model }} {{ reservation.departure_flight_plane_make }}</td>
+                    <td>{{ reservation.departflight_departure_airport }}</td>
+                    <td>{{ reservation.departflight_arrival_airport }}</td>
+                    <td>
+                        <form style="display:inline-block" method="get" action="{% url 'reservations:my-trips/flight-status' %}">
+                            <input type="hidden" value="{{ reservation.departure_flight_id }}">
+                            <input type="submit" value="View Flight Status">
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -2,13 +2,10 @@
     <head>
     </head>
     <body>
-        <h1>Add Flight Reservation Seat</h1>
+        <h1>Add Flight Reservation Seat (for departure OR return flights; will add logic)</h1>
+        <h1>{{ flight_type }}</h1>
         <p>Adding flight seat reservation for Flight #{{ flight.id }} on {{ flight.departure_datetime|date:"l M dS" }} at {{ flight.departure_datetime|date:"fa" }}</p>
-        {% if flight_type == "departure"%}
-        <form action="departure/submit" method="post">
-        {% elif flight_type == "return"%}
-        <form action="return/submit" method="post">
-        {% endif %}
+        <form action="{% url 'reservations:my-trips/add-flight-seat/submit' flight_type %}" method="post">
             {% csrf_token %}
             <label for="seat-values">Flight Seat Selection:</label><br/>
             <select name="seat_id" id="seat-values">

@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <style>
+        table, tr, td, th {
+            border: 1px solid black;
+            text-align: center
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Check-in - Upcoming Flights</h1>
+    <table>
+      <thead>
+          <tr>
+              <th>Reservation #</th>
+              <th>Flight #</th>
+              <th>Departure or Return</th>
+              <th>Flight Date and Time</th>
+              <th>Flight Plane Model</th>
+              <th>Departure Airport</th>
+              <th>Arrival Airport</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+              <td rowspan="2">2069</td>
+              <td>1</td>
+              <td>Departure</td>
+              <td>May 23, 2020, noon</td>
+              <td>737 Boeing</td>
+              <td>BOS</td>
+              <td>ATL</td>
+              <td>
+                <form method="get" action="{% url 'reservations:check-in/review'%}">
+                  <input type="submit" value="Check-in">
+                  <input type="hidden" name="flight_id" value="1000">
+                </form>
+              </td>
+          </tr>
+          <tr>
+              <td>2</td>
+              <td>Return</td>
+              <td>June 6, 2020, 1 p.m.</td>
+              <td>737 Boeing</td>
+              <td>ATL</td>
+              <td>BOS</td>
+              <td><button class="disabled-check-in" disabled>Check-in</button></td>
+          </tr>
+      </tbody>
+    </table>
+    <p>Click <a href="{% url 'reservations:index' %}">here</a> to return home.</p>
+  </body>
+</html>

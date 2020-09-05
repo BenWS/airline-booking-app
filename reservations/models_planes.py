@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 class ServiceClass(models.Model):
     name = models.CharField(max_length=100, blank=False)
+    level = models.PositiveIntegerField()
 
 class PlaneModel(models.Model):
     model_name = models.CharField(max_length=100, null=True)
